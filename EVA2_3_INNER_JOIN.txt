@@ -1,0 +1,1522 @@
+MySQL Shell 8.0.12
+
+Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+
+Oracle is a registered trademark of Oracle Corporation and/or its
+affiliates. Other names may be trademarks of their respective
+owners.
+
+Type '\help' or '\?' for help; '\quit' to exit.
+
+
+ MySQL  JS > \sql
+Switching to SQL mode... Commands end with ;
+
+ MySQL  SQL > \connect -c root@localhost
+The -c option is deprecated, please use --mysql or -mc instead
+Creating a Classic session to 'root@localhost'
+Please provide the password for 'root@localhost': ****
+Save password for 'root@localhost:3306'? [Y]es/[N]o/Ne[v]er (default No): n
+Fetching schema names for autocompletion... Press ^C to stop.
+Your MySQL connection id is 1
+Server version: 5.5.61 MySQL Community Server (GPL)
+No default schema selected; type \use <schema> to set one.
+
+ MySQL  localhost:3306  SQL > \use northwind2
+MySQL Error 1049 (42000): ClassicSession.runSql: Unknown database 'northwind2'
+
+ MySQL  localhost:3306  SQL > \use northwind1
+Default schema set to `northwind1`.
+Fetching table and column names from `northwind1` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  northwind1  SQL > select count(*) from orders;
+ERROR: 1146 (42S02): Table 'northwind1.orders' doesn't exist
+
+ MySQL  localhost:3306  northwind1  SQL > show tables;
++----------------------+
+| Tables_in_northwind1 |
++----------------------+
+| account              |
++----------------------+
+1 row in set (0.0005 sec)
+
+ MySQL  localhost:3306  northwind1  SQL > select count(*) from account;
++----------+
+| count(*) |
++----------+
+|        3 |
++----------+
+1 row in set (0.0094 sec)
+
+ MySQL  localhost:3306  northwind1  SQL > \use xd
+Default schema set to `xd`.
+Fetching table and column names from `xd` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  xd  SQL > show tables;
++--------------+
+| Tables_in_xd |
++--------------+
+| account      |
++--------------+
+1 row in set (0.0005 sec)
+
+ MySQL  localhost:3306  xd  SQL > \use northwind
+Default schema set to `northwind`.
+Fetching table and column names from `northwind` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  northwind  SQL > show tables;
++-----------------------------+
+| Tables_in_northwind         |
++-----------------------------+
+| customers                   |
+| employee_privileges         |
+| employees                   |
+| inventory_transaction_types |
+| order_details               |
+| order_details_status        |
+| orders_status               |
+| orders_tax_status           |
+| privileges                  |
+| products                    |
+| purchase_order_details      |
+| purchase_order_status       |
+| sales_reports               |
+| shippers                    |
+| strings                     |
+| suppliers                   |
++-----------------------------+
+16 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select count(*) from orders;
+ERROR: 1146 (42S02): Table 'northwind.orders' doesn't exist
+
+ MySQL  localhost:3306  northwind  SQL > select count(*) from products;
++----------+
+| count(*) |
++----------+
+|        0 |
++----------+
+1 row in set (0.0003 sec)
+
+ MySQL  localhost:3306  northwind  SQL > desc product;
+ERROR: 1146 (42S02): Table 'northwind.product' doesn't exist
+
+ MySQL  localhost:3306  northwind  SQL > desc products;
++--------------------------+---------------+------+-----+---------+----------------+
+| Field                    | Type          | Null | Key | Default | Extra          |
++--------------------------+---------------+------+-----+---------+----------------+
+| supplier_ids             | longtext      | YES  |     | NULL    |                |
+| id                       | int(11)       | NO   | PRI | NULL    | auto_increment |
+| product_code             | varchar(25)   | YES  | MUL | NULL    |                |
+| product_name             | varchar(50)   | YES  |     | NULL    |                |
+| description              | longtext      | YES  |     | NULL    |                |
+| standard_cost            | decimal(19,4) | YES  |     | 0.0000  |                |
+| list_price               | decimal(19,4) | NO   |     | 0.0000  |                |
+| reorder_level            | int(11)       | YES  |     | NULL    |                |
+| target_level             | int(11)       | YES  |     | NULL    |                |
+| quantity_per_unit        | varchar(50)   | YES  |     | NULL    |                |
+| discontinued             | tinyint(1)    | NO   |     | 0       |                |
+| minimum_reorder_quantity | int(11)       | YES  |     | NULL    |                |
+| category                 | varchar(50)   | YES  |     | NULL    |                |
+| attachments              | longblob      | YES  |     | NULL    |                |
++--------------------------+---------------+------+-----+---------+----------------+
+14 rows in set (0.0041 sec)
+
+ MySQL  localhost:3306  northwind  SQL > show tables;
++-----------------------------+
+| Tables_in_northwind         |
++-----------------------------+
+| customers                   |
+| employee_privileges         |
+| employees                   |
+| inventory_transaction_types |
+| order_details               |
+| order_details_status        |
+| orders_status               |
+| orders_tax_status           |
+| privileges                  |
+| products                    |
+| purchase_order_details      |
+| purchase_order_status       |
+| sales_reports               |
+| shippers                    |
+| strings                     |
+| suppliers                   |
++-----------------------------+
+16 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306  northwind  SQL > drop northwind1;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'northwind1' at line 1
+
+ MySQL  localhost:3306  northwind  SQL > \use evaluacion_2
+MySQL Error 1049 (42000): ClassicSession.runSql: Unknown database 'evaluacion_2'
+
+ MySQL  localhost:3306  northwind  SQL > \use test
+Default schema set to `test`.
+Fetching table and column names from `test` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  test  SQL > drop northwind1
+                                ... ;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'northwind1' at line 1
+
+ MySQL  localhost:3306  test  SQL > drop database northwind1;
+Query OK, 1 row affected (0.0921 sec)
+
+ MySQL  localhost:3306  test  SQL > drop database northwind;
+Query OK, 16 rows affected (0.7020 sec)
+
+ MySQL  localhost:3306  test  SQL > drop database xd;
+Query OK, 1 row affected (0.0396 sec)
+
+ MySQL  localhost:3306  test  SQL > \use northwind
+Default schema set to `northwind`.
+Fetching table and column names from `northwind` for auto-completion... Press ^C to stop.
+
+ MySQL  localhost:3306  northwind  SQL > show tables;
++----------------------+
+| Tables_in_northwind  |
++----------------------+
+| account              |
+| categories           |
+| customercustomerdemo |
+| customerdemographics |
+| customers            |
+| empleados            |
+| employees            |
+| employeeterritories  |
+| lista_empleados      |
+| lista_empleados_a    |
+| mi_rfc               |
+| nombre_cliente       |
+| orderdetails         |
+| orders               |
+| pagos_empleados      |
+| personas             |
+| products             |
+| prueba2              |
+| region               |
+| rfc_gringos          |
+| shippers             |
+| suppliers            |
+| territories          |
+| ventas_producto      |
++----------------------+
+24 rows in set (0.0006 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select count(*) from orders;
++----------+
+| count(*) |
++----------+
+|      830 |
++----------+
+1 row in set (0.0004 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select a.productname, b.categoryname from products a
+                                     ... inner join categories b
+                                     ... on a.categoryid=b.categoryid;
++----------------------------------+----------------+
+| productname                      | categoryname   |
++----------------------------------+----------------+
+| Chai                             | Beverages      |
+| Chang                            | Beverages      |
+| Guaran Fantstica                 | Beverages      |
+| Sasquatch Ale                    | Beverages      |
+| Steeleye Stout                   | Beverages      |
+| Cte de Blaye                     | Beverages      |
+| Chartreuse verte                 | Beverages      |
+| Ipoh Coffee                      | Beverages      |
+| Laughing Lumberjack Lager        | Beverages      |
+| Outback Lager                    | Beverages      |
+| Rhnbru Klosterbier               | Beverages      |
+| Lakkalikri                       | Beverages      |
+| Aniseed Syrup                    | Condiments     |
+| Chef Anton's Cajun Seasoning     | Condiments     |
+| Chef Anton's Gumbo Mix           | Condiments     |
+| Grandma's Boysenberry Spread     | Condiments     |
+| Northwoods Cranberry Sauce       | Condiments     |
+| Genen Shouyu                     | Condiments     |
+| Gula Malacca                     | Condiments     |
+| Sirop d'rable                    | Condiments     |
+| Vegie-spread                     | Condiments     |
+| Louisiana Fiery Hot Pepper Sauce | Condiments     |
+| Louisiana Hot Spiced Okra        | Condiments     |
+| Original Frankfurter grne Soe    | Condiments     |
+| Pavlova                          | Confections    |
+| Teatime Chocolate Biscuits       | Confections    |
+| Sir Rodney's Marmalade           | Confections    |
+| Sir Rodney's Scones              | Confections    |
+| NuNuCa Nu-Nougat-Creme           | Confections    |
+| Gumbr Gummibrchen                | Confections    |
+| Schoggi Schokolade               | Confections    |
+| Zaanse koeken                    | Confections    |
+| Chocolade                        | Confections    |
+| Maxilaku                         | Confections    |
+| Valkoinen suklaa                 | Confections    |
+| Tarte au sucre                   | Confections    |
+| Scottish Longbreads              | Confections    |
+| Queso Cabrales                   | Dairy Products |
+| Queso Manchego La Pastora        | Dairy Products |
+| Gorgonzola Telino                | Dairy Products |
+| Mascarpone Fabioli               | Dairy Products |
+| Geitost                          | Dairy Products |
+| Raclette Courdavault             | Dairy Products |
+| Camembert Pierrot                | Dairy Products |
+| Gudbrandsdalsost                 | Dairy Products |
+| Flotemysost                      | Dairy Products |
+| Mozzarella di Giovanni           | Dairy Products |
+| Gustaf's Knckebrd                | Grains/Cereals |
+| Tunnbrd                          | Grains/Cereals |
+| Singaporean Hokkien Fried Mee    | Grains/Cereals |
+| Filo Mix                         | Grains/Cereals |
+| Gnocchi di nonna Alice           | Grains/Cereals |
+| Ravioli Angelo                   | Grains/Cereals |
+| Wimmers gute Semmelkndel         | Grains/Cereals |
+| Mishi Kobe Niku                  | Meat/Poultry   |
+| Alice Mutton                     | Meat/Poultry   |
+| Thringer Rostbratwurst           | Meat/Poultry   |
+| Perth Pasties                    | Meat/Poultry   |
+| Tourtire                         | Meat/Poultry   |
+| Pt chinois                       | Meat/Poultry   |
+| Uncle Bob's Organic Dried Pears  | Produce        |
+| Tofu                             | Produce        |
+| Rssle Sauerkraut                 | Produce        |
+| Manjimup Dried Apples            | Produce        |
+| Longlife Tofu                    | Produce        |
+| Ikura                            | Seafood        |
+| Konbu                            | Seafood        |
+| Carnarvon Tigers                 | Seafood        |
+| Nord-Ost Matjeshering            | Seafood        |
+| Inlagd Sill                      | Seafood        |
+| Gravad lax                       | Seafood        |
+| Boston Crab Meat                 | Seafood        |
+| Jack's New England Clam Chowder  | Seafood        |
+| Rogede sild                      | Seafood        |
+| Spegesild                        | Seafood        |
+| Escargots de Bourgogne           | Seafood        |
+| Rd Kaviar                        | Seafood        |
++----------------------------------+----------------+
+77 rows in set (0.0005 sec)
+
+ MySQL  localhost:3306  northwind  SQL > desc products;
++-----------------+---------------+------+-----+---------+----------------+
+| Field           | Type          | Null | Key | Default | Extra          |
++-----------------+---------------+------+-----+---------+----------------+
+| ProductID       | int(11)       | NO   | PRI | NULL    | auto_increment |
+| ProductName     | varchar(40)   | NO   | MUL | NULL    |                |
+| SupplierID      | int(11)       | YES  | MUL | NULL    |                |
+| CategoryID      | int(11)       | YES  | MUL | NULL    |                |
+| QuantityPerUnit | varchar(20)   | YES  |     | NULL    |                |
+| UnitPrice       | decimal(10,4) | YES  |     | 0.0000  |                |
+| UnitsInStock    | smallint(2)   | YES  |     | 0       |                |
+| UnitsOnOrder    | smallint(2)   | YES  |     | 0       |                |
+| ReorderLevel    | smallint(2)   | YES  |     | 0       |                |
+| Discontinued    | bit(1)        | NO   |     | b'0'    |                |
++-----------------+---------------+------+-----+---------+----------------+
+10 rows in set (0.0044 sec)
+
+ MySQL  localhost:3306  northwind  SQL > desc suppliers;
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| SupplierID   | int(11)     | NO   | PRI | NULL    | auto_increment |
+| CompanyName  | varchar(40) | NO   | MUL | NULL    |                |
+| ContactName  | varchar(30) | YES  |     | NULL    |                |
+| ContactTitle | varchar(30) | YES  |     | NULL    |                |
+| Address      | varchar(60) | YES  |     | NULL    |                |
+| City         | varchar(15) | YES  |     | NULL    |                |
+| Region       | varchar(15) | YES  |     | NULL    |                |
+| PostalCode   | varchar(10) | YES  | MUL | NULL    |                |
+| Country      | varchar(15) | YES  |     | NULL    |                |
+| Phone        | varchar(24) | YES  |     | NULL    |                |
+| Fax          | varchar(24) | YES  |     | NULL    |                |
+| HomePage     | mediumtext  | YES  |     | NULL    |                |
++--------------+-------------+------+-----+---------+----------------+
+12 rows in set (0.0042 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select a.productname, b.companyname from products a
+                                     ... inner join suppliers b
+                                     ... on a.suppliersid=b.suppliersid;
+ERROR: 1054 (42S22): Unknown column 'a.suppliersid' in 'on clause'
+
+ MySQL  localhost:3306  northwind  SQL > select a.productname, b.companyname from products a inner join suppliers b on a.supplierid=b.supplierid;
++----------------------------------+----------------------------------------+
+| productname                      | companyname                            |
++----------------------------------+----------------------------------------+
+| Cte de Blaye                     | Aux joyeux ecclsiastiques              |
+| Chartreuse verte                 | Aux joyeux ecclsiastiques              |
+| Sasquatch Ale                    | Bigfoot Breweries                      |
+| Steeleye Stout                   | Bigfoot Breweries                      |
+| Laughing Lumberjack Lager        | Bigfoot Breweries                      |
+| Queso Cabrales                   | Cooperativa de Quesos 'Las Cabras'     |
+| Queso Manchego La Pastora        | Cooperativa de Quesos 'Las Cabras'     |
+| Escargots de Bourgogne           | Escargots Nouveaux                     |
+| Chai                             | Exotic Liquids                         |
+| Chang                            | Exotic Liquids                         |
+| Aniseed Syrup                    | Exotic Liquids                         |
+| Gorgonzola Telino                | Formaggi Fortini s.r.l.                |
+| Mascarpone Fabioli               | Formaggi Fortini s.r.l.                |
+| Mozzarella di Giovanni           | Formaggi Fortini s.r.l.                |
+| Sirop d'rable                    | Forts d'rables                         |
+| Tarte au sucre                   | Forts d'rables                         |
+| Manjimup Dried Apples            | G'day, Mate                            |
+| Filo Mix                         | G'day, Mate                            |
+| Perth Pasties                    | G'day, Mate                            |
+| Raclette Courdavault             | Gai pturage                            |
+| Camembert Pierrot                | Gai pturage                            |
+| Grandma's Boysenberry Spread     | Grandma Kelly's Homestead              |
+| Uncle Bob's Organic Dried Pears  | Grandma Kelly's Homestead              |
+| Northwoods Cranberry Sauce       | Grandma Kelly's Homestead              |
+| NuNuCa Nu-Nougat-Creme           | Heli Swaren GmbH & Co. KG              |
+| Gumbr Gummibrchen                | Heli Swaren GmbH & Co. KG              |
+| Schoggi Schokolade               | Heli Swaren GmbH & Co. KG              |
+| Maxilaku                         | Karkki Oy                              |
+| Valkoinen suklaa                 | Karkki Oy                              |
+| Lakkalikri                       | Karkki Oy                              |
+| Singaporean Hokkien Fried Mee    | Leka Trading                           |
+| Ipoh Coffee                      | Leka Trading                           |
+| Gula Malacca                     | Leka Trading                           |
+| Rogede sild                      | Lyngbysild                             |
+| Spegesild                        | Lyngbysild                             |
+| Tourtire                         | Ma Maison                              |
+| Pt chinois                       | Ma Maison                              |
+| Konbu                            | Mayumi's                               |
+| Tofu                             | Mayumi's                               |
+| Genen Shouyu                     | Mayumi's                               |
+| Boston Crab Meat                 | New England Seafood Cannery            |
+| Jack's New England Clam Chowder  | New England Seafood Cannery            |
+| Chef Anton's Cajun Seasoning     | New Orleans Cajun Delights             |
+| Chef Anton's Gumbo Mix           | New Orleans Cajun Delights             |
+| Louisiana Fiery Hot Pepper Sauce | New Orleans Cajun Delights             |
+| Louisiana Hot Spiced Okra        | New Orleans Cajun Delights             |
+| Nord-Ost Matjeshering            | Nord-Ost-Fisch Handelsgesellschaft mbH |
+| Geitost                          | Norske Meierier                        |
+| Gudbrandsdalsost                 | Norske Meierier                        |
+| Flotemysost                      | Norske Meierier                        |
+| Gnocchi di nonna Alice           | Pasta Buttini s.r.l.                   |
+| Ravioli Angelo                   | Pasta Buttini s.r.l.                   |
+| Pavlova                          | Pavlova, Ltd.                          |
+| Alice Mutton                     | Pavlova, Ltd.                          |
+| Carnarvon Tigers                 | Pavlova, Ltd.                          |
+| Vegie-spread                     | Pavlova, Ltd.                          |
+| Outback Lager                    | Pavlova, Ltd.                          |
+| Gustaf's Knckebrd                | PB Knckebrd AB                         |
+| Tunnbrd                          | PB Knckebrd AB                         |
+| Rssle Sauerkraut                 | Plutzer Lebensmittelgromrkte AG        |
+| Thringer Rostbratwurst           | Plutzer Lebensmittelgromrkte AG        |
+| Wimmers gute Semmelkndel         | Plutzer Lebensmittelgromrkte AG        |
+| Rhnbru Klosterbier               | Plutzer Lebensmittelgromrkte AG        |
+| Original Frankfurter grne Soe    | Plutzer Lebensmittelgromrkte AG        |
+| Guaran Fantstica                 | Refrescos Americanas LTDA              |
+| Teatime Chocolate Biscuits       | Specialty Biscuits, Ltd.               |
+| Sir Rodney's Marmalade           | Specialty Biscuits, Ltd.               |
+| Sir Rodney's Scones              | Specialty Biscuits, Ltd.               |
+| Scottish Longbreads              | Specialty Biscuits, Ltd.               |
+| Inlagd Sill                      | Svensk Sjfda AB                        |
+| Gravad lax                       | Svensk Sjfda AB                        |
+| Rd Kaviar                        | Svensk Sjfda AB                        |
+| Mishi Kobe Niku                  | Tokyo Traders                          |
+| Ikura                            | Tokyo Traders                          |
+| Longlife Tofu                    | Tokyo Traders                          |
+| Zaanse koeken                    | Zaanse Snoepfabriek                    |
+| Chocolade                        | Zaanse Snoepfabriek                    |
++----------------------------------+----------------------------------------+
+77 rows in set (0.0006 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select a.productname, b.categoryname, c.companyname from products a inner join categories b on a.categoryid=b.categoryid inner join suppliers c on a.supplierid=c.supplierid;
++----------------------------------+----------------+----------------------------------------+
+| productname                      | categoryname   | companyname                            |
++----------------------------------+----------------+----------------------------------------+
+| Chai                             | Beverages      | Exotic Liquids                         |
+| Chang                            | Beverages      | Exotic Liquids                         |
+| Guaran Fantstica                 | Beverages      | Refrescos Americanas LTDA              |
+| Sasquatch Ale                    | Beverages      | Bigfoot Breweries                      |
+| Steeleye Stout                   | Beverages      | Bigfoot Breweries                      |
+| Cte de Blaye                     | Beverages      | Aux joyeux ecclsiastiques              |
+| Chartreuse verte                 | Beverages      | Aux joyeux ecclsiastiques              |
+| Ipoh Coffee                      | Beverages      | Leka Trading                           |
+| Laughing Lumberjack Lager        | Beverages      | Bigfoot Breweries                      |
+| Outback Lager                    | Beverages      | Pavlova, Ltd.                          |
+| Rhnbru Klosterbier               | Beverages      | Plutzer Lebensmittelgromrkte AG        |
+| Lakkalikri                       | Beverages      | Karkki Oy                              |
+| Aniseed Syrup                    | Condiments     | Exotic Liquids                         |
+| Chef Anton's Cajun Seasoning     | Condiments     | New Orleans Cajun Delights             |
+| Chef Anton's Gumbo Mix           | Condiments     | New Orleans Cajun Delights             |
+| Grandma's Boysenberry Spread     | Condiments     | Grandma Kelly's Homestead              |
+| Northwoods Cranberry Sauce       | Condiments     | Grandma Kelly's Homestead              |
+| Genen Shouyu                     | Condiments     | Mayumi's                               |
+| Gula Malacca                     | Condiments     | Leka Trading                           |
+| Sirop d'rable                    | Condiments     | Forts d'rables                         |
+| Vegie-spread                     | Condiments     | Pavlova, Ltd.                          |
+| Louisiana Fiery Hot Pepper Sauce | Condiments     | New Orleans Cajun Delights             |
+| Louisiana Hot Spiced Okra        | Condiments     | New Orleans Cajun Delights             |
+| Original Frankfurter grne Soe    | Condiments     | Plutzer Lebensmittelgromrkte AG        |
+| Pavlova                          | Confections    | Pavlova, Ltd.                          |
+| Teatime Chocolate Biscuits       | Confections    | Specialty Biscuits, Ltd.               |
+| Sir Rodney's Marmalade           | Confections    | Specialty Biscuits, Ltd.               |
+| Sir Rodney's Scones              | Confections    | Specialty Biscuits, Ltd.               |
+| NuNuCa Nu-Nougat-Creme           | Confections    | Heli Swaren GmbH & Co. KG              |
+| Gumbr Gummibrchen                | Confections    | Heli Swaren GmbH & Co. KG              |
+| Schoggi Schokolade               | Confections    | Heli Swaren GmbH & Co. KG              |
+| Zaanse koeken                    | Confections    | Zaanse Snoepfabriek                    |
+| Chocolade                        | Confections    | Zaanse Snoepfabriek                    |
+| Maxilaku                         | Confections    | Karkki Oy                              |
+| Valkoinen suklaa                 | Confections    | Karkki Oy                              |
+| Tarte au sucre                   | Confections    | Forts d'rables                         |
+| Scottish Longbreads              | Confections    | Specialty Biscuits, Ltd.               |
+| Queso Cabrales                   | Dairy Products | Cooperativa de Quesos 'Las Cabras'     |
+| Queso Manchego La Pastora        | Dairy Products | Cooperativa de Quesos 'Las Cabras'     |
+| Gorgonzola Telino                | Dairy Products | Formaggi Fortini s.r.l.                |
+| Mascarpone Fabioli               | Dairy Products | Formaggi Fortini s.r.l.                |
+| Geitost                          | Dairy Products | Norske Meierier                        |
+| Raclette Courdavault             | Dairy Products | Gai pturage                            |
+| Camembert Pierrot                | Dairy Products | Gai pturage                            |
+| Gudbrandsdalsost                 | Dairy Products | Norske Meierier                        |
+| Flotemysost                      | Dairy Products | Norske Meierier                        |
+| Mozzarella di Giovanni           | Dairy Products | Formaggi Fortini s.r.l.                |
+| Gustaf's Knckebrd                | Grains/Cereals | PB Knckebrd AB                         |
+| Tunnbrd                          | Grains/Cereals | PB Knckebrd AB                         |
+| Singaporean Hokkien Fried Mee    | Grains/Cereals | Leka Trading                           |
+| Filo Mix                         | Grains/Cereals | G'day, Mate                            |
+| Gnocchi di nonna Alice           | Grains/Cereals | Pasta Buttini s.r.l.                   |
+| Ravioli Angelo                   | Grains/Cereals | Pasta Buttini s.r.l.                   |
+| Wimmers gute Semmelkndel         | Grains/Cereals | Plutzer Lebensmittelgromrkte AG        |
+| Mishi Kobe Niku                  | Meat/Poultry   | Tokyo Traders                          |
+| Alice Mutton                     | Meat/Poultry   | Pavlova, Ltd.                          |
+| Thringer Rostbratwurst           | Meat/Poultry   | Plutzer Lebensmittelgromrkte AG        |
+| Perth Pasties                    | Meat/Poultry   | G'day, Mate                            |
+| Tourtire                         | Meat/Poultry   | Ma Maison                              |
+| Pt chinois                       | Meat/Poultry   | Ma Maison                              |
+| Uncle Bob's Organic Dried Pears  | Produce        | Grandma Kelly's Homestead              |
+| Tofu                             | Produce        | Mayumi's                               |
+| Rssle Sauerkraut                 | Produce        | Plutzer Lebensmittelgromrkte AG        |
+| Manjimup Dried Apples            | Produce        | G'day, Mate                            |
+| Longlife Tofu                    | Produce        | Tokyo Traders                          |
+| Ikura                            | Seafood        | Tokyo Traders                          |
+| Konbu                            | Seafood        | Mayumi's                               |
+| Carnarvon Tigers                 | Seafood        | Pavlova, Ltd.                          |
+| Nord-Ost Matjeshering            | Seafood        | Nord-Ost-Fisch Handelsgesellschaft mbH |
+| Inlagd Sill                      | Seafood        | Svensk Sjfda AB                        |
+| Gravad lax                       | Seafood        | Svensk Sjfda AB                        |
+| Boston Crab Meat                 | Seafood        | New England Seafood Cannery            |
+| Jack's New England Clam Chowder  | Seafood        | New England Seafood Cannery            |
+| Rogede sild                      | Seafood        | Lyngbysild                             |
+| Spegesild                        | Seafood        | Lyngbysild                             |
+| Escargots de Bourgogne           | Seafood        | Escargots Nouveaux                     |
+| Rd Kaviar                        | Seafood        | Svensk Sjfda AB                        |
++----------------------------------+----------------+----------------------------------------+
+77 rows in set (0.0006 sec)
+
+ MySQL  localhost:3306  northwind  SQL > show tables;
++----------------------+
+| Tables_in_northwind  |
++----------------------+
+| account              |
+| categories           |
+| customercustomerdemo |
+| customerdemographics |
+| customers            |
+| empleados            |
+| employees            |
+| employeeterritories  |
+| lista_empleados      |
+| lista_empleados_a    |
+| mi_rfc               |
+| nombre_cliente       |
+| orderdetails         |
+| orders               |
+| pagos_empleados      |
+| personas             |
+| products             |
+| prueba2              |
+| region               |
+| rfc_gringos          |
+| shippers             |
+| suppliers            |
+| territories          |
+| ventas_producto      |
++----------------------+
+24 rows in set (0.0006 sec)
+
+ MySQL  localhost:3306  northwind  SQL > desc orders;
++----------------+---------------+------+-----+---------+----------------+
+| Field          | Type          | Null | Key | Default | Extra          |
++----------------+---------------+------+-----+---------+----------------+
+| OrderID        | int(11)       | NO   | PRI | NULL    | auto_increment |
+| CustomerID     | varchar(5)    | YES  | MUL | NULL    |                |
+| EmployeeID     | int(11)       | YES  | MUL | NULL    |                |
+| OrderDate      | datetime      | YES  | MUL | NULL    |                |
+| RequiredDate   | datetime      | YES  |     | NULL    |                |
+| ShippedDate    | datetime      | YES  | MUL | NULL    |                |
+| ShipVia        | int(11)       | YES  | MUL | NULL    |                |
+| Freight        | decimal(10,4) | YES  |     | 0.0000  |                |
+| ShipName       | varchar(40)   | YES  |     | NULL    |                |
+| ShipAddress    | varchar(60)   | YES  |     | NULL    |                |
+| ShipCity       | varchar(15)   | YES  |     | NULL    |                |
+| ShipRegion     | varchar(15)   | YES  |     | NULL    |                |
+| ShipPostalCode | varchar(10)   | YES  | MUL | NULL    |                |
+| ShipCountry    | varchar(15)   | YES  |     | NULL    |                |
++----------------+---------------+------+-----+---------+----------------+
+14 rows in set (0.0044 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select orderid, customer id, empliyeeid from orders limit 20;
+ERROR: 1054 (42S22): Unknown column 'customer' in 'field list'
+
+ MySQL  localhost:3306  northwind  SQL > select orderid, customerid, empliyeeid from orders limit 20;
+ERROR: 1054 (42S22): Unknown column 'empliyeeid' in 'field list'
+
+ MySQL  localhost:3306  northwind  SQL > select orderid, customerid, employeeid from orders limit 20;
++---------+------------+------------+
+| orderid | customerid | employeeid |
++---------+------------+------------+
+|   10248 | VINET      |          5 |
+|   10249 | TOMSP      |          6 |
+|   10250 | HANAR      |          4 |
+|   10251 | VICTE      |          3 |
+|   10252 | SUPRD      |          4 |
+|   10253 | HANAR      |          3 |
+|   10254 | CHOPS      |          5 |
+|   10255 | RICSU      |          9 |
+|   10256 | WELLI      |          3 |
+|   10257 | HILAA      |          4 |
+|   10258 | ERNSH      |          1 |
+|   10259 | CENTC      |          4 |
+|   10260 | OTTIK      |          4 |
+|   10261 | QUEDE      |          4 |
+|   10262 | RATTC      |          8 |
+|   10263 | ERNSH      |          9 |
+|   10264 | FOLKO      |          6 |
+|   10265 | BLONP      |          2 |
+|   10266 | WARTH      |          3 |
+|   10267 | FRANK      |          4 |
++---------+------------+------------+
+20 rows in set (0.0003 sec)
+
+ MySQL  localhost:3306  northwind  SQL > desc employees;
++-----------------+--------------+------+-----+---------+----------------+
+| Field           | Type         | Null | Key | Default | Extra          |
++-----------------+--------------+------+-----+---------+----------------+
+| EmployeeID      | int(11)      | NO   | PRI | NULL    | auto_increment |
+| LastName        | varchar(20)  | NO   | MUL | NULL    |                |
+| FirstName       | varchar(10)  | NO   |     | NULL    |                |
+| Title           | varchar(30)  | YES  |     | NULL    |                |
+| TitleOfCourtesy | varchar(25)  | YES  |     | NULL    |                |
+| BirthDate       | datetime     | YES  |     | NULL    |                |
+| HireDate        | datetime     | YES  |     | NULL    |                |
+| Address         | varchar(60)  | YES  |     | NULL    |                |
+| City            | varchar(15)  | YES  |     | NULL    |                |
+| Region          | varchar(15)  | YES  |     | NULL    |                |
+| PostalCode      | varchar(10)  | YES  | MUL | NULL    |                |
+| Country         | varchar(15)  | YES  |     | NULL    |                |
+| HomePhone       | varchar(24)  | YES  |     | NULL    |                |
+| Extension       | varchar(4)   | YES  |     | NULL    |                |
+| Notes           | mediumtext   | NO   |     | NULL    |                |
+| ReportsTo       | int(11)      | YES  | MUL | NULL    |                |
+| PhotoPath       | varchar(255) | YES  |     | NULL    |                |
+| Salary          | float        | YES  |     | NULL    |                |
++-----------------+--------------+------+-----+---------+----------------+
+18 rows in set (0.0046 sec)
+
+ MySQL  localhost:3306  northwind  SQL > customer;
+ERROR: 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'customer' at line 1
+
+ MySQL  localhost:3306  northwind  SQL > desc customers;
++--------------+-------------+------+-----+---------+-------+
+| Field        | Type        | Null | Key | Default | Extra |
++--------------+-------------+------+-----+---------+-------+
+| CustomerID   | varchar(5)  | NO   | PRI | NULL    |       |
+| CompanyName  | varchar(40) | NO   | MUL | NULL    |       |
+| ContactName  | varchar(30) | YES  |     | NULL    |       |
+| ContactTitle | varchar(30) | YES  |     | NULL    |       |
+| Address      | varchar(60) | YES  |     | NULL    |       |
+| City         | varchar(15) | YES  | MUL | NULL    |       |
+| Region       | varchar(15) | YES  | MUL | NULL    |       |
+| PostalCode   | varchar(10) | YES  | MUL | NULL    |       |
+| Country      | varchar(15) | YES  |     | NULL    |       |
+| Phone        | varchar(24) | YES  |     | NULL    |       |
+| Fax          | varchar(24) | YES  |     | NULL    |       |
++--------------+-------------+------+-----+---------+-------+
+11 rows in set (0.0053 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select a.orderid, b.firstname, c.companyname from orders a
+                                     ... inner join employees on a.employeeid=b.employeeid
+                                     ... inner join customers c on a.customerid=c.customerid;
+ERROR: 1054 (42S22): Unknown column 'b.firstname' in 'field list'
+
+ MySQL  localhost:3306  northwind  SQL > select a.orderid, b.firstname, c.companyname from orders a inner join employees b on a.employeeid=b.employeeid inner join customers c on a.customerid=c.customerid;
++---------+-----------+------------------------------------+
+| orderid | firstname | companyname                        |
++---------+-----------+------------------------------------+
+|   10258 | Nancy     | Ernst Handel                       |
+|   10270 | Nancy     | Wartian Herkku                     |
+|   10275 | Nancy     | Magazzini Alimentari Riuniti       |
+|   10285 | Nancy     | QUICK-Stop                         |
+|   10292 | Nancy     | Tradio Hipermercados               |
+|   10293 | Nancy     | Tortuga Restaurante                |
+|   10304 | Nancy     | Tortuga Restaurante                |
+|   10306 | Nancy     | Romero y tomillo                   |
+|   10311 | Nancy     | Du monde entier                    |
+|   10314 | Nancy     | Rattlesnake Canyon Grocery         |
+|   10316 | Nancy     | Rattlesnake Canyon Grocery         |
+|   10325 | Nancy     | Kniglich Essen                     |
+|   10340 | Nancy     | Bon app'                           |
+|   10351 | Nancy     | Ernst Handel                       |
+|   10357 | Nancy     | LILA-Supermercado                  |
+|   10361 | Nancy     | QUICK-Stop                         |
+|   10364 | Nancy     | Eastern Connection                 |
+|   10371 | Nancy     | La maison d'Asie                   |
+|   10374 | Nancy     | Wolski  Zajazd                     |
+|   10376 | Nancy     | Mre Paillarde                      |
+|   10377 | Nancy     | Seven Seas Imports                 |
+|   10385 | Nancy     | Split Rail Beer & Ale              |
+|   10387 | Nancy     | Sant Gourmet                       |
+|   10393 | Nancy     | Save-a-lot Markets                 |
+|   10394 | Nancy     | Hungry Coyote Import Store         |
+|   10396 | Nancy     | Frankenversand                     |
+|   10400 | Nancy     | Eastern Connection                 |
+|   10401 | Nancy     | Rattlesnake Canyon Grocery         |
+|   10405 | Nancy     | LINO-Delicateses                   |
+|   10453 | Nancy     | Around the Horn                    |
+|   10461 | Nancy     | LILA-Supermercado                  |
+|   10465 | Nancy     | Vaffeljernet                       |
+|   10469 | Nancy     | White Clover Markets               |
+|   10473 | Nancy     | Island Trading                     |
+|   10482 | Nancy     | Lazy K Kountry Store               |
+|   10486 | Nancy     | HILARION-Abastos                   |
+|   10508 | Nancy     | Ottilies Kseladen                  |
+|   10524 | Nancy     | Berglunds snabbkp                  |
+|   10525 | Nancy     | Bon app'                           |
+|   10537 | Nancy     | Richter Supermarkt                 |
+|   10542 | Nancy     | Kniglich Essen                     |
+|   10546 | Nancy     | Victuailles en stock               |
+|   10558 | Nancy     | Around the Horn                    |
+|   10562 | Nancy     | Reggiani Caseifici                 |
+|   10567 | Nancy     | Hungry Owl All-Night Grocers       |
+|   10579 | Nancy     | Let's Stop N Shop                  |
+|   10587 | Nancy     | Que Delcia                         |
+|   10591 | Nancy     | Vaffeljernet                       |
+|   10598 | Nancy     | Rattlesnake Canyon Grocery         |
+|   10604 | Nancy     | Furia Bacalhau e Frutos do Mar     |
+|   10605 | Nancy     | Mre Paillarde                      |
+|   10612 | Nancy     | Save-a-lot Markets                 |
+|   10616 | Nancy     | Great Lakes Food Market            |
+|   10618 | Nancy     | Mre Paillarde                      |
+|   10626 | Nancy     | Berglunds snabbkp                  |
+|   10630 | Nancy     | Kniglich Essen                     |
+|   10653 | Nancy     | Frankenversand                     |
+|   10655 | Nancy     | Reggiani Caseifici                 |
+|   10664 | Nancy     | Furia Bacalhau e Frutos do Mar     |
+|   10665 | Nancy     | Lonesome Pine Restaurant           |
+|   10668 | Nancy     | Die Wandernde Kuh                  |
+|   10671 | Nancy     | France restauration                |
+|   10677 | Nancy     | Antonio Moreno Taquera             |
+|   10680 | Nancy     | Old World Delicatessen             |
+|   10689 | Nancy     | Berglunds snabbkp                  |
+|   10690 | Nancy     | Hanari Carnes                      |
+|   10709 | Nancy     | Gourmet Lanchonetes                |
+|   10710 | Nancy     | Franchi S.p.A.                     |
+|   10713 | Nancy     | Save-a-lot Markets                 |
+|   10717 | Nancy     | Frankenversand                     |
+|   10718 | Nancy     | Kniglich Essen                     |
+|   10733 | Nancy     | Berglunds snabbkp                  |
+|   10743 | Nancy     | Around the Horn                    |
+|   10746 | Nancy     | Chop-suey Chinese                  |
+|   10773 | Nancy     | Ernst Handel                       |
+|   10776 | Nancy     | Ernst Handel                       |
+|   10785 | Nancy     | GROSELLA-Restaurante               |
+|   10788 | Nancy     | QUICK-Stop                         |
+|   10789 | Nancy     | Folies gourmandes                  |
+|   10792 | Nancy     | Wolski  Zajazd                     |
+|   10800 | Nancy     | Seven Seas Imports                 |
+|   10813 | Nancy     | Ricardo Adocicados                 |
+|   10821 | Nancy     | Split Rail Beer & Ale              |
+|   10825 | Nancy     | Drachenblut Delikatessen           |
+|   10827 | Nancy     | Bon app'                           |
+|   10834 | Nancy     | Tradio Hipermercados               |
+|   10835 | Nancy     | Alfreds Futterkiste                |
+|   10842 | Nancy     | Tortuga Restaurante                |
+|   10850 | Nancy     | Victuailles en stock               |
+|   10859 | Nancy     | Frankenversand                     |
+|   10877 | Nancy     | Ricardo Adocicados                 |
+|   10886 | Nancy     | Hanari Carnes                      |
+|   10888 | Nancy     | Godos Cocina Tpica                 |
+|   10894 | Nancy     | Save-a-lot Markets                 |
+|   10900 | Nancy     | Wellington Importadora             |
+|   10902 | Nancy     | Folk och f HB                      |
+|   10909 | Nancy     | Sant Gourmet                       |
+|   10910 | Nancy     | Wilman Kala                        |
+|   10916 | Nancy     | Rancho grande                      |
+|   10921 | Nancy     | Vaffeljernet                       |
+|   10928 | Nancy     | Galera del gastrnomo               |
+|   10946 | Nancy     | Vaffeljernet                       |
+|   10950 | Nancy     | Magazzini Alimentari Riuniti       |
+|   10952 | Nancy     | Alfreds Futterkiste                |
+|   10968 | Nancy     | Ernst Handel                       |
+|   10969 | Nancy     | Comrcio Mineiro                    |
+|   10975 | Nancy     | Bottom-Dollar Markets              |
+|   10976 | Nancy     | HILARION-Abastos                   |
+|   10981 | Nancy     | Hanari Carnes                      |
+|   10984 | Nancy     | Save-a-lot Markets                 |
+|   10991 | Nancy     | QUICK-Stop                         |
+|   10992 | Nancy     | The Big Cheese                     |
+|   10995 | Nancy     | Pericles Comidas clsicas           |
+|   11012 | Nancy     | Frankenversand                     |
+|   11023 | Nancy     | B's Beverages                      |
+|   11027 | Nancy     | Bottom-Dollar Markets              |
+|   11038 | Nancy     | Suprmes dlices                     |
+|   11039 | Nancy     | LINO-Delicateses                   |
+|   11064 | Nancy     | Save-a-lot Markets                 |
+|   11067 | Nancy     | Drachenblut Delikatessen           |
+|   11069 | Nancy     | Tortuga Restaurante                |
+|   11071 | Nancy     | LILA-Supermercado                  |
+|   11077 | Nancy     | Rattlesnake Canyon Grocery         |
+|   10265 | Andrew    | Blondesddsl pre et fils            |
+|   10277 | Andrew    | Morgenstern Gesundkost             |
+|   10280 | Andrew    | Berglunds snabbkp                  |
+|   10295 | Andrew    | Vins et alcools Chevalier          |
+|   10300 | Andrew    | Magazzini Alimentari Riuniti       |
+|   10307 | Andrew    | Lonesome Pine Restaurant           |
+|   10312 | Andrew    | Die Wandernde Kuh                  |
+|   10313 | Andrew    | QUICK-Stop                         |
+|   10327 | Andrew    | Folk och f HB                      |
+|   10339 | Andrew    | Mre Paillarde                      |
+|   10345 | Andrew    | QUICK-Stop                         |
+|   10368 | Andrew    | Ernst Handel                       |
+|   10379 | Andrew    | Que Delcia                         |
+|   10388 | Andrew    | Seven Seas Imports                 |
+|   10392 | Andrew    | Piccolo und mehr                   |
+|   10398 | Andrew    | Save-a-lot Markets                 |
+|   10404 | Andrew    | Magazzini Alimentari Riuniti       |
+|   10407 | Andrew    | Ottilies Kseladen                  |
+|   10414 | Andrew    | Familia Arquibaldo                 |
+|   10422 | Andrew    | Franchi S.p.A.                     |
+|   10457 | Andrew    | Kniglich Essen                     |
+|   10462 | Andrew    | Consolidated Holdings              |
+|   10471 | Andrew    | B's Beverages                      |
+|   10478 | Andrew    | Victuailles en stock               |
+|   10487 | Andrew    | Queen Cozinha                      |
+|   10502 | Andrew    | Pericles Comidas clsicas           |
+|   10515 | Andrew    | QUICK-Stop                         |
+|   10516 | Andrew    | Hungry Owl All-Night Grocers       |
+|   10541 | Andrew    | Hanari Carnes                      |
+|   10552 | Andrew    | HILARION-Abastos                   |
+|   10553 | Andrew    | Wartian Herkku                     |
+|   10556 | Andrew    | Simons bistro                      |
+|   10561 | Andrew    | Folk och f HB                      |
+|   10563 | Andrew    | Ricardo Adocicados                 |
+|   10583 | Andrew    | Wartian Herkku                     |
+|   10588 | Andrew    | QUICK-Stop                         |
+|   10595 | Andrew    | Ernst Handel                       |
+|   10615 | Andrew    | Wilman Kala                        |
+|   10620 | Andrew    | Laughing Bacchus Wine Cellars      |
+|   10657 | Andrew    | Save-a-lot Markets                 |
+|   10663 | Andrew    | Bon app'                           |
+|   10669 | Andrew    | Simons bistro                      |
+|   10673 | Andrew    | Wilman Kala                        |
+|   10676 | Andrew    | Tortuga Restaurante                |
+|   10683 | Andrew    | Du monde entier                    |
+|   10686 | Andrew    | Piccolo und mehr                   |
+|   10691 | Andrew    | QUICK-Stop                         |
+|   10727 | Andrew    | Reggiani Caseifici                 |
+|   10734 | Andrew    | Gourmet Lanchonetes                |
+|   10737 | Andrew    | Vins et alcools Chevalier          |
+|   10738 | Andrew    | Spcialits du monde                 |
+|   10752 | Andrew    | North/South                        |
+|   10780 | Andrew    | LILA-Supermercado                  |
+|   10781 | Andrew    | Wartian Herkku                     |
+|   10787 | Andrew    | La maison d'Asie                   |
+|   10798 | Andrew    | Island Trading                     |
+|   10805 | Andrew    | The Big Cheese                     |
+|   10808 | Andrew    | Old World Delicatessen             |
+|   10810 | Andrew    | Laughing Bacchus Wine Cellars      |
+|   10815 | Andrew    | Save-a-lot Markets                 |
+|   10819 | Andrew    | Cactus Comidas para llevar         |
+|   10832 | Andrew    | La maison d'Asie                   |
+|   10846 | Andrew    | Suprmes dlices                     |
+|   10858 | Andrew    | La corne d'abondance               |
+|   10865 | Andrew    | QUICK-Stop                         |
+|   10912 | Andrew    | Hungry Owl All-Night Grocers       |
+|   10915 | Andrew    | Tortuga Restaurante                |
+|   10919 | Andrew    | LINO-Delicateses                   |
+|   10939 | Andrew    | Magazzini Alimentari Riuniti       |
+|   10949 | Andrew    | Bottom-Dollar Markets              |
+|   10967 | Andrew    | Toms Spezialitten                  |
+|   10971 | Andrew    | France restauration                |
+|   10982 | Andrew    | Bottom-Dollar Markets              |
+|   10983 | Andrew    | Save-a-lot Markets                 |
+|   10985 | Andrew    | Hungry Owl All-Night Grocers       |
+|   10989 | Andrew    | Que Delcia                         |
+|   10990 | Andrew    | Ernst Handel                       |
+|   10994 | Andrew    | Vaffeljernet                       |
+|   11000 | Andrew    | Rattlesnake Canyon Grocery         |
+|   11001 | Andrew    | Folk och f HB                      |
+|   11005 | Andrew    | Wilman Kala                        |
+|   11009 | Andrew    | Godos Cocina Tpica                 |
+|   11010 | Andrew    | Reggiani Caseifici                 |
+|   11013 | Andrew    | Romero y tomillo                   |
+|   11014 | Andrew    | LINO-Delicateses                   |
+|   11015 | Andrew    | Sant Gourmet                       |
+|   11020 | Andrew    | Ottilies Kseladen                  |
+|   11028 | Andrew    | Kniglich Essen                     |
+|   11032 | Andrew    | White Clover Markets               |
+|   11035 | Andrew    | Suprmes dlices                     |
+|   11042 | Andrew    | Comrcio Mineiro                    |
+|   11053 | Andrew    | Piccolo und mehr                   |
+|   11059 | Andrew    | Ricardo Adocicados                 |
+|   11060 | Andrew    | Franchi S.p.A.                     |
+|   11070 | Andrew    | Lehmanns Marktstand                |
+|   11073 | Andrew    | Pericles Comidas clsicas           |
+|   10251 | Janet     | Victuailles en stock               |
+|   10253 | Janet     | Hanari Carnes                      |
+|   10256 | Janet     | Wellington Importadora             |
+|   10266 | Janet     | Wartian Herkku                     |
+|   10273 | Janet     | QUICK-Stop                         |
+|   10283 | Janet     | LILA-Supermercado                  |
+|   10309 | Janet     | Hungry Owl All-Night Grocers       |
+|   10321 | Janet     | Island Trading                     |
+|   10330 | Janet     | LILA-Supermercado                  |
+|   10332 | Janet     | Mre Paillarde                      |
+|   10346 | Janet     | Rattlesnake Canyon Grocery         |
+|   10352 | Janet     | Furia Bacalhau e Frutos do Mar     |
+|   10362 | Janet     | Bon app'                           |
+|   10365 | Janet     | Antonio Moreno Taquera             |
+|   10375 | Janet     | Hungry Coyote Import Store         |
+|   10381 | Janet     | LILA-Supermercado                  |
+|   10384 | Janet     | Berglunds snabbkp                  |
+|   10391 | Janet     | Drachenblut Delikatessen           |
+|   10409 | Janet     | Ocano Atlntico Ltda.               |
+|   10410 | Janet     | Bottom-Dollar Markets              |
+|   10413 | Janet     | La maison d'Asie                   |
+|   10415 | Janet     | Hungry Coyote Import Store         |
+|   10420 | Janet     | Wellington Importadora             |
+|   10429 | Janet     | Hungry Owl All-Night Grocers       |
+|   10432 | Janet     | Split Rail Beer & Ale              |
+|   10433 | Janet     | Princesa Isabel Vinhos             |
+|   10434 | Janet     | Folk och f HB                      |
+|   10436 | Janet     | Blondesddsl pre et fils            |
+|   10438 | Janet     | Toms Spezialitten                  |
+|   10441 | Janet     | Old World Delicatessen             |
+|   10442 | Janet     | Ernst Handel                       |
+|   10444 | Janet     | Berglunds snabbkp                  |
+|   10445 | Janet     | Berglunds snabbkp                  |
+|   10449 | Janet     | Blondesddsl pre et fils            |
+|   10468 | Janet     | Kniglich Essen                     |
+|   10479 | Janet     | Rattlesnake Canyon Grocery         |
+|   10484 | Janet     | B's Beverages                      |
+|   10492 | Janet     | Bottom-Dollar Markets              |
+|   10495 | Janet     | Laughing Bacchus Wine Cellars      |
+|   10505 | Janet     | Mre Paillarde                      |
+|   10514 | Janet     | Ernst Handel                       |
+|   10517 | Janet     | North/South                        |
+|   10530 | Janet     | Piccolo und mehr                   |
+|   10536 | Janet     | Lehmanns Marktstand                |
+|   10540 | Janet     | QUICK-Stop                         |
+|   10547 | Janet     | Seven Seas Imports                 |
+|   10548 | Janet     | Toms Spezialitten                  |
+|   10568 | Janet     | Galera del gastrnomo               |
+|   10570 | Janet     | Mre Paillarde                      |
+|   10572 | Janet     | Berglunds snabbkp                  |
+|   10576 | Janet     | Tortuga Restaurante                |
+|   10581 | Janet     | Familia Arquibaldo                 |
+|   10582 | Janet     | Blauer See Delikatessen            |
+|   10592 | Janet     | Lehmanns Marktstand                |
+|   10594 | Janet     | Old World Delicatessen             |
+|   10619 | Janet     | Mre Paillarde                      |
+|   10625 | Janet     | Ana Trujillo Emparedados y helados |
+|   10638 | Janet     | LINO-Delicateses                   |
+|   10644 | Janet     | Wellington Importadora             |
+|   10662 | Janet     | Lonesome Pine Restaurant           |
+|   10681 | Janet     | Great Lakes Food Market            |
+|   10682 | Janet     | Antonio Moreno Taquera             |
+|   10684 | Janet     | Ottilies Kseladen                  |
+|   10693 | Janet     | White Clover Markets               |
+|   10697 | Janet     | LINO-Delicateses                   |
+|   10699 | Janet     | Morgenstern Gesundkost             |
+|   10700 | Janet     | Save-a-lot Markets                 |
+|   10712 | Janet     | Hungry Owl All-Night Grocers       |
+|   10715 | Janet     | Bon app'                           |
+|   10723 | Janet     | White Clover Markets               |
+|   10732 | Janet     | Bon app'                           |
+|   10739 | Janet     | Vins et alcools Chevalier          |
+|   10742 | Janet     | Bottom-Dollar Markets              |
+|   10748 | Janet     | Save-a-lot Markets                 |
+|   10751 | Janet     | Richter Supermarkt                 |
+|   10753 | Janet     | Franchi S.p.A.                     |
+|   10758 | Janet     | Richter Supermarkt                 |
+|   10759 | Janet     | Ana Trujillo Emparedados y helados |
+|   10762 | Janet     | Folk och f HB                      |
+|   10763 | Janet     | Folies gourmandes                  |
+|   10765 | Janet     | QUICK-Stop                         |
+|   10768 | Janet     | Around the Horn                    |
+|   10769 | Janet     | Vaffeljernet                       |
+|   10772 | Janet     | Lehmanns Marktstand                |
+|   10778 | Janet     | Berglunds snabbkp                  |
+|   10779 | Janet     | Morgenstern Gesundkost             |
+|   10793 | Janet     | Around the Horn                    |
+|   10796 | Janet     | HILARION-Abastos                   |
+|   10806 | Janet     | Victuailles en stock               |
+|   10814 | Janet     | Victuailles en stock               |
+|   10817 | Janet     | Kniglich Essen                     |
+|   10820 | Janet     | Rattlesnake Canyon Grocery         |
+|   10831 | Janet     | Sant Gourmet                       |
+|   10838 | Janet     | LINO-Delicateses                   |
+|   10839 | Janet     | Tradio Hipermercados               |
+|   10854 | Janet     | Ernst Handel                       |
+|   10855 | Janet     | Old World Delicatessen             |
+|   10856 | Janet     | Antonio Moreno Taquera             |
+|   10860 | Janet     | France restauration                |
+|   10879 | Janet     | Wilman Kala                        |
+|   10895 | Janet     | Ernst Handel                       |
+|   10897 | Janet     | Hungry Owl All-Night Grocers       |
+|   10903 | Janet     | Hanari Carnes                      |
+|   10904 | Janet     | White Clover Markets               |
+|   10911 | Janet     | Godos Cocina Tpica                 |
+|   10918 | Janet     | Bottom-Dollar Markets              |
+|   10924 | Janet     | Berglunds snabbkp                  |
+|   10925 | Janet     | Hanari Carnes                      |
+|   10934 | Janet     | Lehmanns Marktstand                |
+|   10936 | Janet     | Great Lakes Food Market            |
+|   10938 | Janet     | QUICK-Stop                         |
+|   10947 | Janet     | B's Beverages                      |
+|   10948 | Janet     | Godos Cocina Tpica                 |
+|   10960 | Janet     | HILARION-Abastos                   |
+|   10964 | Janet     | Spcialits du monde                 |
+|   10974 | Janet     | Split Rail Beer & Ale              |
+|   10988 | Janet     | Rattlesnake Canyon Grocery         |
+|   11003 | Janet     | The Cracker Box                    |
+|   11004 | Janet     | Maison Dewey                       |
+|   11006 | Janet     | Great Lakes Food Market            |
+|   11011 | Janet     | Alfreds Futterkiste                |
+|   11021 | Janet     | QUICK-Stop                         |
+|   11041 | Janet     | Chop-suey Chinese                  |
+|   11049 | Janet     | Gourmet Lanchonetes                |
+|   11052 | Janet     | Hanari Carnes                      |
+|   11057 | Janet     | North/South                        |
+|   11063 | Janet     | Hungry Owl All-Night Grocers       |
+|   10250 | Margaret  | Hanari Carnes                      |
+|   10252 | Margaret  | Suprmes dlices                     |
+|   10257 | Margaret  | HILARION-Abastos                   |
+|   10259 | Margaret  | Centro comercial Moctezuma         |
+|   10260 | Margaret  | Ottilies Kseladen                  |
+|   10261 | Margaret  | Que Delcia                         |
+|   10267 | Margaret  | Frankenversand                     |
+|   10281 | Margaret  | Romero y tomillo                   |
+|   10282 | Margaret  | Romero y tomillo                   |
+|   10284 | Margaret  | Lehmanns Marktstand                |
+|   10288 | Margaret  | Reggiani Caseifici                 |
+|   10294 | Margaret  | Rattlesnake Canyon Grocery         |
+|   10299 | Margaret  | Ricardo Adocicados                 |
+|   10302 | Margaret  | Suprmes dlices                     |
+|   10315 | Margaret  | Island Trading                     |
+|   10323 | Margaret  | Kniglich Essen                     |
+|   10326 | Margaret  | Blido Comidas preparadas           |
+|   10328 | Margaret  | Furia Bacalhau e Frutos do Mar     |
+|   10329 | Margaret  | Split Rail Beer & Ale              |
+|   10337 | Margaret  | Frankenversand                     |
+|   10338 | Margaret  | Old World Delicatessen             |
+|   10342 | Margaret  | Frankenversand                     |
+|   10343 | Margaret  | Lehmanns Marktstand                |
+|   10344 | Margaret  | White Clover Markets               |
+|   10347 | Margaret  | Familia Arquibaldo                 |
+|   10348 | Margaret  | Die Wandernde Kuh                  |
+|   10360 | Margaret  | Blondesddsl pre et fils            |
+|   10363 | Margaret  | Drachenblut Delikatessen           |
+|   10373 | Margaret  | Hungry Owl All-Night Grocers       |
+|   10382 | Margaret  | Ernst Handel                       |
+|   10389 | Margaret  | Bottom-Dollar Markets              |
+|   10403 | Margaret  | Ernst Handel                       |
+|   10417 | Margaret  | Simons bistro                      |
+|   10418 | Margaret  | QUICK-Stop                         |
+|   10419 | Margaret  | Richter Supermarkt                 |
+|   10426 | Margaret  | Galera del gastrnomo               |
+|   10427 | Margaret  | Piccolo und mehr                   |
+|   10430 | Margaret  | Ernst Handel                       |
+|   10431 | Margaret  | Bottom-Dollar Markets              |
+|   10440 | Margaret  | Save-a-lot Markets                 |
+|   10447 | Margaret  | Ricardo Adocicados                 |
+|   10448 | Margaret  | Rancho grande                      |
+|   10451 | Margaret  | QUICK-Stop                         |
+|   10454 | Margaret  | La maison d'Asie                   |
+|   10459 | Margaret  | Victuailles en stock               |
+|   10464 | Margaret  | Furia Bacalhau e Frutos do Mar     |
+|   10466 | Margaret  | Comrcio Mineiro                    |
+|   10470 | Margaret  | Bon app'                           |
+|   10485 | Margaret  | LINO-Delicateses                   |
+|   10493 | Margaret  | La maison d'Asie                   |
+|   10494 | Margaret  | Comrcio Mineiro                    |
+|   10499 | Margaret  | LILA-Supermercado                  |
+|   10504 | Margaret  | White Clover Markets               |
+|   10509 | Margaret  | Blauer See Delikatessen            |
+|   10511 | Margaret  | Bon app'                           |
+|   10518 | Margaret  | Tortuga Restaurante                |
+|   10522 | Margaret  | Lehmanns Marktstand                |
+|   10526 | Margaret  | Wartian Herkku                     |
+|   10535 | Margaret  | Antonio Moreno Taquera             |
+|   10544 | Margaret  | Lonesome Pine Restaurant           |
+|   10551 | Margaret  | Furia Bacalhau e Frutos do Mar     |
+|   10554 | Margaret  | Ottilies Kseladen                  |
+|   10564 | Margaret  | Rattlesnake Canyon Grocery         |
+|   10574 | Margaret  | Trail's Head Gourmet Provisioners  |
+|   10578 | Margaret  | B's Beverages                      |
+|   10580 | Margaret  | Ottilies Kseladen                  |
+|   10584 | Margaret  | Blondesddsl pre et fils            |
+|   10590 | Margaret  | Mre Paillarde                      |
+|   10600 | Margaret  | Hungry Coyote Import Store         |
+|   10606 | Margaret  | Tradio Hipermercados               |
+|   10608 | Margaret  | Toms Spezialitten                  |
+|   10613 | Margaret  | HILARION-Abastos                   |
+|   10617 | Margaret  | Great Lakes Food Market            |
+|   10621 | Margaret  | Island Trading                     |
+|   10622 | Margaret  | Ricardo Adocicados                 |
+|   10624 | Margaret  | The Cracker Box                    |
+|   10628 | Margaret  | Blondesddsl pre et fils            |
+|   10629 | Margaret  | Godos Cocina Tpica                 |
+|   10634 | Margaret  | Folies gourmandes                  |
+|   10636 | Margaret  | Wartian Herkku                     |
+|   10640 | Margaret  | Die Wandernde Kuh                  |
+|   10641 | Margaret  | HILARION-Abastos                   |
+|   10645 | Margaret  | Hanari Carnes                      |
+|   10647 | Margaret  | Que Delcia                         |
+|   10652 | Margaret  | Gourmet Lanchonetes                |
+|   10658 | Margaret  | QUICK-Stop                         |
+|   10670 | Margaret  | Frankenversand                     |
+|   10674 | Margaret  | Island Trading                     |
+|   10685 | Margaret  | Gourmet Lanchonetes                |
+|   10688 | Margaret  | Vaffeljernet                       |
+|   10692 | Margaret  | Alfreds Futterkiste                |
+|   10698 | Margaret  | Ernst Handel                       |
+|   10702 | Margaret  | Alfreds Futterkiste                |
+|   10707 | Margaret  | Around the Horn                    |
+|   10716 | Margaret  | Rancho grande                      |
+|   10725 | Margaret  | Familia Arquibaldo                 |
+|   10726 | Margaret  | Eastern Connection                 |
+|   10728 | Margaret  | Queen Cozinha                      |
+|   10740 | Margaret  | White Clover Markets               |
+|   10741 | Margaret  | Around the Horn                    |
+|   10749 | Margaret  | Island Trading                     |
+|   10755 | Margaret  | Bon app'                           |
+|   10760 | Margaret  | Maison Dewey                       |
+|   10766 | Margaret  | Ottilies Kseladen                  |
+|   10767 | Margaret  | Suprmes dlices                     |
+|   10774 | Margaret  | Folk och f HB                      |
+|   10783 | Margaret  | Hanari Carnes                      |
+|   10784 | Margaret  | Magazzini Alimentari Riuniti       |
+|   10801 | Margaret  | Blido Comidas preparadas           |
+|   10802 | Margaret  | Simons bistro                      |
+|   10803 | Margaret  | Wellington Importadora             |
+|   10807 | Margaret  | Franchi S.p.A.                     |
+|   10816 | Margaret  | Great Lakes Food Market            |
+|   10830 | Margaret  | Tradio Hipermercados               |
+|   10840 | Margaret  | LINO-Delicateses                   |
+|   10843 | Margaret  | Victuailles en stock               |
+|   10847 | Margaret  | Save-a-lot Markets                 |
+|   10861 | Margaret  | White Clover Markets               |
+|   10863 | Margaret  | HILARION-Abastos                   |
+|   10864 | Margaret  | Around the Horn                    |
+|   10873 | Margaret  | Wilman Kala                        |
+|   10875 | Margaret  | Berglunds snabbkp                  |
+|   10878 | Margaret  | QUICK-Stop                         |
+|   10881 | Margaret  | Cactus Comidas para llevar         |
+|   10882 | Margaret  | Save-a-lot Markets                 |
+|   10884 | Margaret  | Let's Stop N Shop                  |
+|   10892 | Margaret  | Maison Dewey                       |
+|   10898 | Margaret  | Ocano Atlntico Ltda.               |
+|   10901 | Margaret  | HILARION-Abastos                   |
+|   10906 | Margaret  | Wolski  Zajazd                     |
+|   10908 | Margaret  | Reggiani Caseifici                 |
+|   10913 | Margaret  | Queen Cozinha                      |
+|   10917 | Margaret  | Romero y tomillo                   |
+|   10920 | Margaret  | Around the Horn                    |
+|   10926 | Margaret  | Ana Trujillo Emparedados y helados |
+|   10927 | Margaret  | La corne d'abondance               |
+|   10930 | Margaret  | Suprmes dlices                     |
+|   10931 | Margaret  | Richter Supermarkt                 |
+|   10935 | Margaret  | Wellington Importadora             |
+|   10943 | Margaret  | B's Beverages                      |
+|   10945 | Margaret  | Morgenstern Gesundkost             |
+|   10966 | Margaret  | Chop-suey Chinese                  |
+|   10972 | Margaret  | La corne d'abondance               |
+|   10980 | Margaret  | Folk och f HB                      |
+|   10996 | Margaret  | QUICK-Stop                         |
+|   11002 | Margaret  | Save-a-lot Markets                 |
+|   11018 | Margaret  | Lonesome Pine Restaurant           |
+|   11024 | Margaret  | Eastern Connection                 |
+|   11026 | Margaret  | Franchi S.p.A.                     |
+|   11029 | Margaret  | Chop-suey Chinese                  |
+|   11040 | Margaret  | Great Lakes Food Market            |
+|   11044 | Margaret  | Wolski  Zajazd                     |
+|   11061 | Margaret  | Great Lakes Food Market            |
+|   11062 | Margaret  | Reggiani Caseifici                 |
+|   11072 | Margaret  | Ernst Handel                       |
+|   11076 | Margaret  | Bon app'                           |
+|   10248 | Steven    | Vins et alcools Chevalier          |
+|   10254 | Steven    | Chop-suey Chinese                  |
+|   10269 | Steven    | White Clover Markets               |
+|   10297 | Steven    | Blondesddsl pre et fils            |
+|   10320 | Steven    | Wartian Herkku                     |
+|   10333 | Steven    | Wartian Herkku                     |
+|   10358 | Steven    | La maison d'Asie                   |
+|   10359 | Steven    | Seven Seas Imports                 |
+|   10372 | Steven    | Queen Cozinha                      |
+|   10378 | Steven    | Folk och f HB                      |
+|   10397 | Steven    | Princesa Isabel Vinhos             |
+|   10463 | Steven    | Suprmes dlices                     |
+|   10474 | Steven    | Pericles Comidas clsicas           |
+|   10477 | Steven    | Princesa Isabel Vinhos             |
+|   10529 | Steven    | Maison Dewey                       |
+|   10549 | Steven    | QUICK-Stop                         |
+|   10569 | Steven    | Rattlesnake Canyon Grocery         |
+|   10575 | Steven    | Morgenstern Gesundkost             |
+|   10607 | Steven    | Save-a-lot Markets                 |
+|   10648 | Steven    | Ricardo Adocicados                 |
+|   10649 | Steven    | Maison Dewey                       |
+|   10650 | Steven    | Familia Arquibaldo                 |
+|   10654 | Steven    | Berglunds snabbkp                  |
+|   10675 | Steven    | Frankenversand                     |
+|   10711 | Steven    | Save-a-lot Markets                 |
+|   10714 | Steven    | Save-a-lot Markets                 |
+|   10721 | Steven    | QUICK-Stop                         |
+|   10730 | Steven    | Bon app'                           |
+|   10761 | Steven    | Rattlesnake Canyon Grocery         |
+|   10812 | Steven    | Reggiani Caseifici                 |
+|   10823 | Steven    | LILA-Supermercado                  |
+|   10841 | Steven    | Suprmes dlices                     |
+|   10851 | Steven    | Ricardo Adocicados                 |
+|   10866 | Steven    | Berglunds snabbkp                  |
+|   10869 | Steven    | Seven Seas Imports                 |
+|   10870 | Steven    | Wolski  Zajazd                     |
+|   10872 | Steven    | Godos Cocina Tpica                 |
+|   10874 | Steven    | Godos Cocina Tpica                 |
+|   10899 | Steven    | LILA-Supermercado                  |
+|   10922 | Steven    | Hanari Carnes                      |
+|   10954 | Steven    | LINO-Delicateses                   |
+|   11043 | Steven    | Spcialits du monde                 |
+|   10249 | Michael   | Toms Spezialitten                  |
+|   10264 | Michael   | Folk och f HB                      |
+|   10271 | Michael   | Split Rail Beer & Ale              |
+|   10272 | Michael   | Rattlesnake Canyon Grocery         |
+|   10274 | Michael   | Vins et alcools Chevalier          |
+|   10291 | Michael   | Que Delcia                         |
+|   10296 | Michael   | LILA-Supermercado                  |
+|   10298 | Michael   | Hungry Owl All-Night Grocers       |
+|   10317 | Michael   | Lonesome Pine Restaurant           |
+|   10350 | Michael   | La maison d'Asie                   |
+|   10355 | Michael   | Around the Horn                    |
+|   10356 | Michael   | Die Wandernde Kuh                  |
+|   10370 | Michael   | Chop-suey Chinese                  |
+|   10390 | Michael   | Ernst Handel                       |
+|   10395 | Michael   | HILARION-Abastos                   |
+|   10423 | Michael   | Gourmet Lanchonetes                |
+|   10425 | Michael   | La maison d'Asie                   |
+|   10439 | Michael   | Mre Paillarde                      |
+|   10446 | Michael   | Toms Spezialitten                  |
+|   10480 | Michael   | Folies gourmandes                  |
+|   10489 | Michael   | Piccolo und mehr                   |
+|   10500 | Michael   | La maison d'Asie                   |
+|   10503 | Michael   | Hungry Owl All-Night Grocers       |
+|   10510 | Michael   | Save-a-lot Markets                 |
+|   10519 | Michael   | Chop-suey Chinese                  |
+|   10528 | Michael   | Great Lakes Food Market            |
+|   10539 | Michael   | B's Beverages                      |
+|   10555 | Michael   | Save-a-lot Markets                 |
+|   10559 | Michael   | Blondesddsl pre et fils            |
+|   10599 | Michael   | B's Beverages                      |
+|   10611 | Michael   | Wolski  Zajazd                     |
+|   10637 | Michael   | Queen Cozinha                      |
+|   10643 | Michael   | Alfreds Futterkiste                |
+|   10656 | Michael   | Great Lakes Food Market            |
+|   10701 | Michael   | Hungry Owl All-Night Grocers       |
+|   10703 | Michael   | Folk och f HB                      |
+|   10704 | Michael   | Queen Cozinha                      |
+|   10708 | Michael   | The Big Cheese                     |
+|   10735 | Michael   | Let's Stop N Shop                  |
+|   10744 | Michael   | Vaffeljernet                       |
+|   10747 | Michael   | Piccolo und mehr                   |
+|   10754 | Michael   | Magazzini Alimentari Riuniti       |
+|   10757 | Michael   | Save-a-lot Markets                 |
+|   10764 | Michael   | Ernst Handel                       |
+|   10790 | Michael   | Gourmet Lanchonetes                |
+|   10791 | Michael   | Frankenversand                     |
+|   10794 | Michael   | Que Delcia                         |
+|   10804 | Michael   | Seven Seas Imports                 |
+|   10822 | Michael   | Trail's Head Gourmet Provisioners  |
+|   10826 | Michael   | Blondesddsl pre et fils            |
+|   10833 | Michael   | Ottilies Kseladen                  |
+|   10867 | Michael   | Lonesome Pine Restaurant           |
+|   10885 | Michael   | Suprmes dlices                     |
+|   10907 | Michael   | Spcialits du monde                 |
+|   10914 | Michael   | Queen Cozinha                      |
+|   10929 | Michael   | Frankenversand                     |
+|   10933 | Michael   | Island Trading                     |
+|   10944 | Michael   | Bottom-Dollar Markets              |
+|   10956 | Michael   | Blauer See Delikatessen            |
+|   10959 | Michael   | Gourmet Lanchonetes                |
+|   10965 | Michael   | Old World Delicatessen             |
+|   10973 | Michael   | La corne d'abondance               |
+|   10999 | Michael   | Ottilies Kseladen                  |
+|   11019 | Michael   | Rancho grande                      |
+|   11025 | Michael   | Wartian Herkku                     |
+|   11031 | Michael   | Save-a-lot Markets                 |
+|   11045 | Michael   | Bottom-Dollar Markets              |
+|   10289 | Robert    | B's Beverages                      |
+|   10303 | Robert    | Godos Cocina Tpica                 |
+|   10308 | Robert    | Ana Trujillo Emparedados y helados |
+|   10319 | Robert    | Tortuga Restaurante                |
+|   10322 | Robert    | Pericles Comidas clsicas           |
+|   10335 | Robert    | Hungry Owl All-Night Grocers       |
+|   10336 | Robert    | Princesa Isabel Vinhos             |
+|   10341 | Robert    | Simons bistro                      |
+|   10349 | Robert    | Split Rail Beer & Ale              |
+|   10353 | Robert    | Piccolo und mehr                   |
+|   10367 | Robert    | Vaffeljernet                       |
+|   10406 | Robert    | Queen Cozinha                      |
+|   10424 | Robert    | Mre Paillarde                      |
+|   10428 | Robert    | Reggiani Caseifici                 |
+|   10458 | Robert    | Suprmes dlices                     |
+|   10483 | Robert    | White Clover Markets               |
+|   10490 | Robert    | HILARION-Abastos                   |
+|   10496 | Robert    | Tradio Hipermercados               |
+|   10497 | Robert    | Lehmanns Marktstand                |
+|   10507 | Robert    | Antonio Moreno Taquera             |
+|   10512 | Robert    | Familia Arquibaldo                 |
+|   10513 | Robert    | Die Wandernde Kuh                  |
+|   10520 | Robert    | Sant Gourmet                       |
+|   10523 | Robert    | Seven Seas Imports                 |
+|   10527 | Robert    | QUICK-Stop                         |
+|   10531 | Robert    | Ocano Atlntico Ltda.               |
+|   10532 | Robert    | Eastern Connection                 |
+|   10550 | Robert    | Godos Cocina Tpica                 |
+|   10573 | Robert    | Antonio Moreno Taquera             |
+|   10585 | Robert    | Wellington Importadora             |
+|   10593 | Robert    | Lehmanns Marktstand                |
+|   10597 | Robert    | Piccolo und mehr                   |
+|   10601 | Robert    | HILARION-Abastos                   |
+|   10609 | Robert    | Du monde entier                    |
+|   10633 | Robert    | Ernst Handel                       |
+|   10639 | Robert    | Sant Gourmet                       |
+|   10642 | Robert    | Simons bistro                      |
+|   10659 | Robert    | Queen Cozinha                      |
+|   10661 | Robert    | Hungry Owl All-Night Grocers       |
+|   10666 | Robert    | Richter Supermarkt                 |
+|   10667 | Robert    | Ernst Handel                       |
+|   10678 | Robert    | Save-a-lot Markets                 |
+|   10695 | Robert    | Wilman Kala                        |
+|   10731 | Robert    | Chop-suey Chinese                  |
+|   10775 | Robert    | The Cracker Box                    |
+|   10777 | Robert    | Gourmet Lanchonetes                |
+|   10797 | Robert    | Drachenblut Delikatessen           |
+|   10809 | Robert    | Wellington Importadora             |
+|   10818 | Robert    | Magazzini Alimentari Riuniti       |
+|   10836 | Robert    | Ernst Handel                       |
+|   10848 | Robert    | Consolidated Holdings              |
+|   10868 | Robert    | Queen Cozinha                      |
+|   10876 | Robert    | Bon app'                           |
+|   10880 | Robert    | Folk och f HB                      |
+|   10890 | Robert    | Du monde entier                    |
+|   10891 | Robert    | Lehmanns Marktstand                |
+|   10896 | Robert    | Maison Dewey                       |
+|   10923 | Robert    | La maison d'Asie                   |
+|   10937 | Robert    | Cactus Comidas para llevar         |
+|   10941 | Robert    | Save-a-lot Markets                 |
+|   10958 | Robert    | Ocano Atlntico Ltda.               |
+|   10993 | Robert    | Folk och f HB                      |
+|   11008 | Robert    | Ernst Handel                       |
+|   11030 | Robert    | Save-a-lot Markets                 |
+|   11033 | Robert    | Richter Supermarkt                 |
+|   11037 | Robert    | Godos Cocina Tpica                 |
+|   11047 | Robert    | Eastern Connection                 |
+|   11048 | Robert    | Bottom-Dollar Markets              |
+|   11051 | Robert    | La maison d'Asie                   |
+|   11055 | Robert    | HILARION-Abastos                   |
+|   11066 | Robert    | White Clover Markets               |
+|   11074 | Robert    | Simons bistro                      |
+|   10262 | Laura     | Rattlesnake Canyon Grocery         |
+|   10268 | Laura     | GROSELLA-Restaurante               |
+|   10276 | Laura     | Tortuga Restaurante                |
+|   10278 | Laura     | Berglunds snabbkp                  |
+|   10279 | Laura     | Lehmanns Marktstand                |
+|   10286 | Laura     | QUICK-Stop                         |
+|   10287 | Laura     | Ricardo Adocicados                 |
+|   10290 | Laura     | Comrcio Mineiro                    |
+|   10301 | Laura     | Die Wandernde Kuh                  |
+|   10305 | Laura     | Old World Delicatessen             |
+|   10310 | Laura     | The Big Cheese                     |
+|   10318 | Laura     | Island Trading                     |
+|   10334 | Laura     | Victuailles en stock               |
+|   10354 | Laura     | Pericles Comidas clsicas           |
+|   10366 | Laura     | Galera del gastrnomo               |
+|   10369 | Laura     | Split Rail Beer & Ale              |
+|   10380 | Laura     | Hungry Owl All-Night Grocers       |
+|   10383 | Laura     | Around the Horn                    |
+|   10399 | Laura     | Vaffeljernet                       |
+|   10402 | Laura     | Ernst Handel                       |
+|   10408 | Laura     | Folies gourmandes                  |
+|   10412 | Laura     | Wartian Herkku                     |
+|   10416 | Laura     | Wartian Herkku                     |
+|   10421 | Laura     | Que Delcia                         |
+|   10435 | Laura     | Consolidated Holdings              |
+|   10437 | Laura     | Wartian Herkku                     |
+|   10443 | Laura     | Reggiani Caseifici                 |
+|   10450 | Laura     | Victuailles en stock               |
+|   10452 | Laura     | Save-a-lot Markets                 |
+|   10455 | Laura     | Wartian Herkku                     |
+|   10456 | Laura     | Kniglich Essen                     |
+|   10460 | Laura     | Folk och f HB                      |
+|   10467 | Laura     | Magazzini Alimentari Riuniti       |
+|   10472 | Laura     | Seven Seas Imports                 |
+|   10476 | Laura     | HILARION-Abastos                   |
+|   10481 | Laura     | Ricardo Adocicados                 |
+|   10488 | Laura     | Frankenversand                     |
+|   10491 | Laura     | Furia Bacalhau e Frutos do Mar     |
+|   10498 | Laura     | HILARION-Abastos                   |
+|   10521 | Laura     | Cactus Comidas para llevar         |
+|   10533 | Laura     | Folk och f HB                      |
+|   10534 | Laura     | Lehmanns Marktstand                |
+|   10543 | Laura     | LILA-Supermercado                  |
+|   10545 | Laura     | Lazy K Kountry Store               |
+|   10560 | Laura     | Frankenversand                     |
+|   10565 | Laura     | Mre Paillarde                      |
+|   10571 | Laura     | Ernst Handel                       |
+|   10589 | Laura     | Great Lakes Food Market            |
+|   10596 | Laura     | White Clover Markets               |
+|   10602 | Laura     | Vaffeljernet                       |
+|   10603 | Laura     | Save-a-lot Markets                 |
+|   10610 | Laura     | La maison d'Asie                   |
+|   10614 | Laura     | Blauer See Delikatessen            |
+|   10623 | Laura     | Frankenversand                     |
+|   10627 | Laura     | Save-a-lot Markets                 |
+|   10631 | Laura     | La maison d'Asie                   |
+|   10632 | Laura     | Die Wandernde Kuh                  |
+|   10635 | Laura     | Magazzini Alimentari Riuniti       |
+|   10651 | Laura     | Die Wandernde Kuh                  |
+|   10660 | Laura     | Hungry Coyote Import Store         |
+|   10679 | Laura     | Blondesddsl pre et fils            |
+|   10694 | Laura     | QUICK-Stop                         |
+|   10696 | Laura     | White Clover Markets               |
+|   10706 | Laura     | Old World Delicatessen             |
+|   10719 | Laura     | Let's Stop N Shop                  |
+|   10720 | Laura     | Que Delcia                         |
+|   10722 | Laura     | Save-a-lot Markets                 |
+|   10724 | Laura     | Mre Paillarde                      |
+|   10729 | Laura     | LINO-Delicateses                   |
+|   10756 | Laura     | Split Rail Beer & Ale              |
+|   10770 | Laura     | Hanari Carnes                      |
+|   10786 | Laura     | Queen Cozinha                      |
+|   10795 | Laura     | Ernst Handel                       |
+|   10811 | Laura     | LINO-Delicateses                   |
+|   10824 | Laura     | Folk och f HB                      |
+|   10844 | Laura     | Piccolo und mehr                   |
+|   10845 | Laura     | QUICK-Stop                         |
+|   10852 | Laura     | Rattlesnake Canyon Grocery         |
+|   10857 | Laura     | Berglunds snabbkp                  |
+|   10862 | Laura     | Lehmanns Marktstand                |
+|   10883 | Laura     | Lonesome Pine Restaurant           |
+|   10887 | Laura     | Galera del gastrnomo               |
+|   10932 | Laura     | Bon app'                           |
+|   10940 | Laura     | Bon app'                           |
+|   10955 | Laura     | Folk och f HB                      |
+|   10957 | Laura     | HILARION-Abastos                   |
+|   10961 | Laura     | Queen Cozinha                      |
+|   10962 | Laura     | QUICK-Stop                         |
+|   10977 | Laura     | Folk och f HB                      |
+|   10979 | Laura     | Ernst Handel                       |
+|   10986 | Laura     | Ocano Atlntico Ltda.               |
+|   10987 | Laura     | Eastern Connection                 |
+|   10997 | Laura     | LILA-Supermercado                  |
+|   10998 | Laura     | Wolski  Zajazd                     |
+|   11007 | Laura     | Princesa Isabel Vinhos             |
+|   11034 | Laura     | Old World Delicatessen             |
+|   11036 | Laura     | Drachenblut Delikatessen           |
+|   11046 | Laura     | Die Wandernde Kuh                  |
+|   11050 | Laura     | Folk och f HB                      |
+|   11054 | Laura     | Cactus Comidas para llevar         |
+|   11056 | Laura     | Eastern Connection                 |
+|   11065 | Laura     | LILA-Supermercado                  |
+|   11068 | Laura     | Queen Cozinha                      |
+|   11075 | Laura     | Richter Supermarkt                 |
+|   10255 | Anne      | Richter Supermarkt                 |
+|   10263 | Anne      | Ernst Handel                       |
+|   10324 | Anne      | Save-a-lot Markets                 |
+|   10331 | Anne      | Bon app'                           |
+|   10386 | Anne      | Familia Arquibaldo                 |
+|   10411 | Anne      | Bottom-Dollar Markets              |
+|   10475 | Anne      | Suprmes dlices                     |
+|   10501 | Anne      | Blauer See Delikatessen            |
+|   10506 | Anne      | Kniglich Essen                     |
+|   10538 | Anne      | B's Beverages                      |
+|   10557 | Anne      | Lehmanns Marktstand                |
+|   10566 | Anne      | Blondesddsl pre et fils            |
+|   10577 | Anne      | Trail's Head Gourmet Provisioners  |
+|   10586 | Anne      | Reggiani Caseifici                 |
+|   10646 | Anne      | Hungry Owl All-Night Grocers       |
+|   10672 | Anne      | Berglunds snabbkp                  |
+|   10687 | Anne      | Hungry Owl All-Night Grocers       |
+|   10705 | Anne      | HILARION-Abastos                   |
+|   10736 | Anne      | Hungry Owl All-Night Grocers       |
+|   10745 | Anne      | QUICK-Stop                         |
+|   10750 | Anne      | Wartian Herkku                     |
+|   10771 | Anne      | Ernst Handel                       |
+|   10782 | Anne      | Cactus Comidas para llevar         |
+|   10799 | Anne      | Kniglich Essen                     |
+|   10828 | Anne      | Rancho grande                      |
+|   10829 | Anne      | Island Trading                     |
+|   10837 | Anne      | Berglunds snabbkp                  |
+|   10849 | Anne      | Kniglich Essen                     |
+|   10853 | Anne      | Blauer See Delikatessen            |
+|   10871 | Anne      | Bon app'                           |
+|   10889 | Anne      | Rattlesnake Canyon Grocery         |
+|   10893 | Anne      | Kniglich Essen                     |
+|   10905 | Anne      | Wellington Importadora             |
+|   10942 | Anne      | Reggiani Caseifici                 |
+|   10951 | Anne      | Richter Supermarkt                 |
+|   10953 | Anne      | Around the Horn                    |
+|   10963 | Anne      | Furia Bacalhau e Frutos do Mar     |
+|   10970 | Anne      | Blido Comidas preparadas           |
+|   10978 | Anne      | Maison Dewey                       |
+|   11016 | Anne      | Around the Horn                    |
+|   11017 | Anne      | Ernst Handel                       |
+|   11022 | Anne      | Hanari Carnes                      |
+|   11058 | Anne      | Blauer See Delikatessen            |
++---------+-----------+------------------------------------+
+830 rows in set (0.0020 sec)
+
+ MySQL  localhost:3306  northwind  SQL > desc orderdetails;
++-----------+---------------+------+-----+---------+-------+
+| Field     | Type          | Null | Key | Default | Extra |
++-----------+---------------+------+-----+---------+-------+
+| OrderID   | int(11)       | NO   | PRI | NULL    |       |
+| ProductID | int(11)       | NO   | PRI | NULL    |       |
+| UnitPrice | decimal(10,4) | NO   |     | 0.0000  |       |
+| Quantity  | smallint(2)   | NO   |     | 1       |       |
+| Discount  | double(8,0)   | NO   |     | 0       |       |
++-----------+---------------+------+-----+---------+-------+
+5 rows in set (0.0047 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select a.orderid, b.productname, (a.quantity * a.unitprice) as total from orderdetails a
+                                     ... inner join products b on a.productid=b.productid limit 20;
++---------+--------------+-----------+
+| orderid | productname  | total     |
++---------+--------------+-----------+
+|   10265 | Alice Mutton |  936.0000 |
+|   10279 | Alice Mutton |  468.0000 |
+|   10294 | Alice Mutton |  468.0000 |
+|   10302 | Alice Mutton | 1248.0000 |
+|   10319 | Alice Mutton |  249.6000 |
+|   10338 | Alice Mutton |  624.0000 |
+|   10339 | Alice Mutton | 2184.0000 |
+|   10346 | Alice Mutton | 1123.2000 |
+|   10415 | Alice Mutton |   62.4000 |
+|   10430 | Alice Mutton | 1404.0000 |
+|   10431 | Alice Mutton | 1560.0000 |
+|   10444 | Alice Mutton |  312.0000 |
+|   10523 | Alice Mutton |  975.0000 |
+|   10530 | Alice Mutton | 1560.0000 |
+|   10550 | Alice Mutton |  312.0000 |
+|   10564 | Alice Mutton |  624.0000 |
+|   10573 | Alice Mutton |  702.0000 |
+|   10607 | Alice Mutton | 3900.0000 |
+|   10686 | Alice Mutton | 1170.0000 |
+|   10696 | Alice Mutton |  780.0000 |
++---------+--------------+-----------+
+20 rows in set (0.0007 sec)
+
+ MySQL  localhost:3306  northwind  SQL >
