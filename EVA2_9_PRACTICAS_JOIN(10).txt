@@ -1,0 +1,113 @@
+1.  MySQL  localhost:3306  northwind  SQL > select a.companyname, sum(c.unitprice*c.quantity) 
+as total from customers a inner join orders b on a.customerid=b.customerid 
+inner join orderdetails c on b.orderid=c.orderid group by a.companyname order by total desc limit 1;
++-------------+-------------+
+| companyname | total       |
++-------------+-------------+
+| QUICK-Stop  | 117483.3900 |
++-------------+-------------+
+1 row in set (0.0034 sec)
+2.  MySQL  localhost:3306  northwind  SQL > select a.companyname, sum(c.unitprice*c.quantity) 
+as total from customers a inner join orders b on a.customerid=b.customerid 
+inner join orderdetails c on b.orderid=c.orderid group by a.companyname order by total limit 1;
++----------------------------+----------+
+| companyname                | total    |
++----------------------------+----------+
+| Centro comercial Moctezuma | 100.8000 |
++----------------------------+----------+
+3. MySQL  localhost:3306  northwind  SQL > select b.productname, a.quantity 
+from orderdetails a 
+inner join products b on a.productid=b.productid 
+group by a.productid order by quantity desc limit 2;
++----------------------------+----------+
+| productname                | quantity |
++----------------------------+----------+
+| Northwoods Cranberry Sauce |       70 |
+| Chocolade                  |       70 |
++----------------------------+----------+
+2 rows in set (0.0036 sec)
+
+4 y 5. 
+MySQL  localhost:3306  northwind  SQL > select b.productname, a.quantity from orderdetails a inner join products b on a.productid=b.productid group by a.productid order by a.unitprice desc limit 1;
++--------------+----------+
+| productname  | quantity |
++--------------+----------+
+| Cte de Blaye |       20 |
++--------------+----------+
+1 row in set (0.0040 sec)
+
+ MySQL  localhost:3306  northwind  SQL > select b.productname, a.quantity from orderdetails a inner join products b on a.productid=b.productid group by a.productid order by a.unitprice limit 1;
++-------------+----------+
+| productname | quantity |
++-------------+----------+
+| Geitost     |       25 |
++-------------+----------+
+1 row in set (0.0039 sec)
+6
+ MySQL  localhost:3306  northwind  SQL > select a.companyname, c.productname from customers a inner join orders b on a.customerid=b.customerid inner join orderdetails d on b.orderid=d.orderid inner join products c on c.productid=d.productid group by a.companyname order by count(b.orderid) desc limit 1;
++--------------------+-------------+
+| companyname        | productname |
++--------------------+-------------+
+| Save-a-lot Markets | Pavlova     |
++--------------------+-------------+
+1 row in set (0.0046 sec)
+
+ MySQL  localhost:3306  northwind  SQL >
+ 
+7 
+
+MySQL  localhost:3306  northwind  SQL > select a.lastname, a.firstname from employees a inner join orders b on a.employeeid=b.employeeid group by a.lastname order by count(b.orderid) desc limit 1;
++----------+-----------+
+| lastname | firstname |
++----------+-----------+
+| Peacock  | Margaret  |
++----------+-----------+
+1 row in set (0.0008 sec)
+
+ MySQL  localhost:3306  northwind  SQL >
+
+8
+
+ MySQL  localhost:3306  northwind  SQL > select a.lastname, a.firstname from employees a inner join orders b on a.employeeid=b.employeeid group by a.lastname order by count(b.orderid)  limit 1;
++----------+-----------+
+| lastname | firstname |
++----------+-----------+
+| Buchanan | Steven    |
++----------+-----------+
+1 row in set (0.0008 sec)
+
+ MySQL  localhost:3306  northwind  SQL >
+
+9
+
+ MySQL  localhost:3306  northwind  SQL > select a.companyname, b.unitsonorder, b.unitsinstock
+                                     ... from suppliers a inner join products b on a.supplierid=b.supplierid
+                                     ... where b.unitsonorder<15 and b.unitsinstock<15
+                                     ... group by a.companyname
+                                     ... order by unitsonorder asc;
++----------------------------------------+--------------+--------------+
+| companyname                            | unitsonorder | unitsinstock |
++----------------------------------------+--------------+--------------+
+| New Orleans Cajun Delights             |            0 |            0 |
+| Nord-Ost-Fisch Handelsgesellschaft mbH |            0 |           10 |
+| Pavlova, Ltd.                          |            0 |            0 |
+| Formaggi Fortini s.r.l.                |            0 |           14 |
+| Plutzer Lebensmittelgromrkte AG        |            0 |            0 |
+| G'day, Mate                            |            0 |            0 |
+| Grandma Kelly's Homestead              |            0 |            6 |
+| Specialty Biscuits, Ltd.               |           10 |            6 |
++----------------------------------------+--------------+--------------+
+8 rows in set (0.0009 sec)
+
+10
+
+ MySQL  localhost:3306  northwind  SQL > select a.companyname
+                                     ... from suppliers a inner join products b on a.supplierid=b.supplierid
+                                     ... group by a.companyname
+                                     ... order by sum(b.unitsonorder * b.unitprice) desc limit 1;
++---------------------------------+
+| companyname                     |
++---------------------------------+
+| Plutzer Lebensmittelgromrkte AG |
++---------------------------------+
+1 row in set (0.0565 sec)
